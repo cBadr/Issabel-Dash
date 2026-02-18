@@ -22,3 +22,13 @@ class Config {
     const APP_LANG = 'ar'; // اللغة الافتراضية: العربية
     const DEBUG_MODE = true; // وضع التصحيح
 }
+
+// تفعيل عرض الأخطاء بناءً على وضع التصحيح
+if (Config::DEBUG_MODE) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    error_reporting(0);
+}

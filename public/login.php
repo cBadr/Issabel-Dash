@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../includes/Auth.php';
 require_once __DIR__ . '/../includes/Database.php';
 require_once __DIR__ . '/../includes/Logger.php';
@@ -18,11 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($username) || empty($password)) {
         $error = 'الرجاء إدخال اسم المستخدم وكلمة المرور';
     } else {
-        if (Auth::login($username, $password)) {
-            header("Location: index.php");
-            exit;
-        } else {
-            $error = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+        try {
+            if (Auth::login($username, $password)) {
+                header("Location: index.php");
+                exit;
+            } else {
+                $error = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+            }
+        } catch (Exception $e) {
+            $error = 'حدث خطأ في النظام: ' . $e->getMessage();
+            if (Config::DEBUG_MODE) {
+                $error .= '<hr>Details:<pre class="mt-2" style="direction: ltr; text-align: left;">' . $e->getTraceAsString() . '</pre>';
+            }
         }
     }
 }
