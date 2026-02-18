@@ -2,6 +2,8 @@
 // فئة لإدارة التحويلات (Extension Manager)
 // Class to manage extensions
 
+require_once __DIR__ . '/Database.php';
+
 class ExtensionManager {
     private $db;
 

@@ -2,6 +2,8 @@
 // فئة لتسجيل الأحداث (Logging Class)
 // Class for logging events to database
 
+require_once __DIR__ . '/Database.php';
+
 class Logger {
     // دالة لتسجيل حدث جديد (Log Event)
     public static function log($action, $details = '', $user_id = null) {

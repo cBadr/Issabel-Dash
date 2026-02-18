@@ -34,7 +34,20 @@ if (isset($_GET['delete'])) {
 }
 
 // قائمة الملفات
-$files = array_diff(scandir($uploadDir), array('.', '..'));
+$files = [];
+if (is_dir($uploadDir)) {
+    $scanned_files = @scandir($uploadDir);
+    if ($scanned_files !== false) {
+        $files = array_diff($scanned_files, array('.', '..'));
+    } else {
+        $error = "لا يمكن قراءة مجلد التسجيلات (مشكلة صلاحيات).";
+    }
+} else {
+    // محاولة إنشاء المجلد إذا لم يكن موجوداً
+    if (!@mkdir($uploadDir, 0755, true)) {
+        $error = "مجلد التسجيلات غير موجود ولا يمكن إنشاؤه (مشكلة صلاحيات).";
+    }
+}
 
 include __DIR__ . '/../templates/header.php';
 include __DIR__ . '/../templates/navbar.php';

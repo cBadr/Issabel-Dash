@@ -2,6 +2,8 @@
 // فئة لإدارة الرد الآلي (IVR Manager)
 // Class to manage IVR
 
+require_once __DIR__ . '/Database.php';
+
 class IVRManager {
     private $db;
 

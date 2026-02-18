@@ -2,6 +2,8 @@
 // فئة لإدارة الطوابير (Queue Manager)
 // Class to manage queues
 
+require_once __DIR__ . '/Database.php';
+
 class QueueManager {
     private $db;
 

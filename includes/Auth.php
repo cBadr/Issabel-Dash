@@ -2,6 +2,8 @@
 // فئة للتحكم في الجلسات والمصادقة (Authentication Class)
 // Class to handle user sessions and authentication
 
+require_once __DIR__ . '/Database.php';
+
 class Auth {
     // بدء الجلسة (Start Session)
     public static function start_session() {
